@@ -1,0 +1,25 @@
+name: Validate Organizaê
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  repository-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check prohibited Lovable Cloud references
+        run: |
+          if grep -Rni --exclude-dir=.git --exclude='lovable-rules.md' 'lovable cloud' .; then
+            echo 'Lovable Cloud reference found outside the rules document.'
+            exit 1
+          fi
+      - name: Check secret patterns
+        run: |
+          if grep -Rni --exclude-dir=.git --exclude='types.ts' -E 'service_role|sk-[A-Za-z0-9_-]{20,}|AIza[A-Za-z0-9_-]{20,}' .; then
+            echo 'Potential secret found in repository.'
+            exit 1
+          fi

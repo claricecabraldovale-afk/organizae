@@ -1,25 +1,25 @@
 # Arquitetura do Organizaê
 
-## Princípios
+## Fonte de verdade
 
-- GitHub é a fonte oficial do código.
-- Supabase externo é o backend oficial.
-- Lovable será usado apenas para desenvolvimento da aplicação.
-- Lovable Cloud é proibido.
-- Mudanças importantes devem ser planejadas, revisadas e versionadas.
+- Código: GitHub `claricecabraldovale-afk/organizae`.
+- Banco, Auth, Storage e Functions: Supabase externo `zwakszslarlombcdrhvj`.
+- Interface: código React/TypeScript sincronizado com GitHub e desenvolvido no Lovable.
+- Lovable Cloud: proibido.
+
+## Pipeline
+
+1. Requisito e análise.
+2. Aprovação da decisão.
+3. Alteração versionada no GitHub.
+4. Migration aplicada no Supabase quando necessário.
+5. Teste e revisão de segurança.
+6. Integração da interface.
 
 ## Camadas
 
-- Frontend: React, TypeScript e PWA.
-- Backend: Supabase Auth, PostgreSQL, Storage e Edge Functions.
-- Versionamento: GitHub.
-- Publicação: serviço externo a ser escolhido posteriormente.
-
-## Fluxo de mudança
-
-1. Definir o requisito.
-2. Avaliar impacto e segurança.
-3. Criar ou atualizar arquivos no GitHub.
-4. Aplicar migrations no Supabase somente após aprovação.
-5. Testar.
-6. Registrar a decisão.
+- `src/integrations/supabase`: cliente e tipos.
+- `src/services`: acesso a dados e regras de negócio.
+- `src/features`: funcionalidades por domínio.
+- `supabase/migrations`: histórico do schema.
+- `supabase/functions`: código server-side futuro.
